@@ -1,0 +1,31 @@
+body {
+    padding: 50px;
+    font: "Lucida Grande", Helvetica, Arial, sans-serif;
+  }
+
+.nav-container {
+    display :flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: #4E944F;
+    list-style-type: none;
+  }
+  
+.nav-item {
+    padding: 15px;
+    cursor: pointer;
+    padding-left: 20px;
+  }
+  
+.nav-item a {
+    color: white;
+    padding: 100px;
+    text-align: center;
+    text-decoration: none;
+  }
+  
+h1 {
+    text-align: center;
+    font: "Lucida Geande";
+    font-size: 40px;
+  }

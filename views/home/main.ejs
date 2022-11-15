@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include ../particle/head.ejs %>
+    <link rel='stylesheet' href='/stylesheets/main.css' />
+  </head>
+  <body>
+    <%- include ../particle/navbar.ejs%>
+    <nav>
+      <ul class="nav-container">
+          <% if(sess != null) { %>
+            <li class="nav-item"> <a href="/">도서 목록</a></li>
+            <li class="nav-item"> <a href="/edituser">내 정보 수정</a></li>
+            <li class="nav-item"> <a href="/cart">장바구니</a></li>
+            <li class="nav-item"> <a href="/order/list">주문 목록</a></li>
+            <li class="nav-item"> <a href="/user/logout">로그아웃</a></li>
+          <% } else { %>
+            <li class="nav-item"> <a href="/">도서 목록</a></li>
+            <li class="nav-item"> <a href="/user/signup">회원가입</a></li>
+            <li class="nav-item"> <a href="/user/login">로그인</a></li>
+          <% } %>
+        </ul>
+    </nav>
+    <!-- table -->
+    <div class='container'>
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">도서명</th>
+              <th scope="col">수량</th>
+              <th scope="col">가격</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(let book of book_info){ %>
+              <tr>
+                <td><img src="../images/book/<%= book.book_id %>.jpeg" width="200" height="200" /></td>
+                <td><a href="/book/<%= book.book_id %>"><%= book.book_name %></a></td>
+                <td><%= book.book_val %></td>
+                <td><%= book.book_price %>원</td>
+              </tr>
+            <%}%>
+          </tbody>
+        </table><table class="table table-striped">
+          
+        </table>
+    </div>
+    <button type="button" onclick="location.href='/book'" class="btn btn-success">도서 추가하기</button>
+  </body>
+</html>

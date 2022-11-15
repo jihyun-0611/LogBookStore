@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include ../particle/head.ejs %>
+        <link rel='stylesheet' href='/stylesheets/edituser.css' />
+</head>
+
+<body>
+    <%- include ../particle/navbar.ejs %>
+        <nav>
+            <ul class="nav-container">
+                <% if(sess !=null) { %>
+                    <li class="nav-item"> <a href="/">도서 목록</a></li>
+                    <li class="nav-item"> <a href="/edituser">내 정보 수정</a></li>
+                    <li class="nav-item"> <a href="/cart">장바구니</a></li>
+                    <li class="nav-item"> <a href="/order/list">주문 목록</a></li>
+                    <li class="nav-item"> <a href="/user/logout">로그아웃</a></li>
+                    <% } %>
+            </ul>
+        </nav>
+        <br>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+                    <h5 class="mb-0">카드 정보</h5>
+                    <table class="table border bg-white">
+                        <thead>
+                            <tr>
+                                <th>카드 번호</th>
+                                <th>유효기간</th>
+                                <th>카드 종류</th>
+                                <th>ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i=0; i < card_info.length; i++){ %>
+                                <form method="post" action="/edituser/editcard">
+                                    <tr>
+                                        <td><input class="form-control" type="text" name="card_num"
+                                                value="<%=card_info[i].card_num%>">
+                                        </td>
+                                        <td><input class="form-control" type="text" name="card_period"
+                                                value="<%=card_info[i].card_period%>">
+                                        </td>
+                                        <td><input class="form-control" type="text" name="card_kind"
+                                                value="<%=card_info[i].card_kind%>"></td>
+                                        <td>
+                                            <%= sess %>
+                                        </td>
+                                        <td><input type="submit" value="수정" class="btn btn-success" /></td>
+                                        <td><input type="submit" value="삭제" class="btn btn-success"
+                                            onclick="javascript: form.action='/edituser/deletecard';" /></td>
+                                    </tr>              
+                                </form>
+                            <% } %>
+                                <form class="addCard" action="/edituser/addCard" method="post">
+                                    <tr>
+                                        <td><input class="form-control" type="text" name="card_num" placeholder=""
+                                                value=""></td>
+                                        <td><input class="form-control" type="text" name="card_period"
+                                                placeholder="" value=""></td>
+                                        <td><input class="form-control" type="text" name="card_kind" placeholder=""
+                                                value=""></td>
+                                        <td>
+                                            <%= sess %>
+                                        </td>
+                                        <td colspan="2"><button type="submit" class="btn btn-success wd-full">추가</button></td>
+                                    </tr>
+                                </form>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br>
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+                    <h5 class="mb-0">배송지 정보</h5>
+                    <table class="table border bg-white">
+                        <thead>
+                            <tr>
+                                <th>우편번호</th>
+                                <th>기본 주소</th>
+                                <th>상세 주소</th>
+                                <th>ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i=0; i < address_info.length; i++){ %>
+                                <tr>
+                                    <form method="post" action="/edituser/editaddress">
+                                        <td><input class="form-control" type="text" name="address_num"
+                                                value="<%=address_info[i].address_num%>"></td>
+                                        <td><input class="form-control" type="text" name="address_basic"
+                                                value="<%=address_info[i].address_basic%>"></td>
+                                        <td><input class="form-control" type="text" name="address_semic"
+                                                value="<%=address_info[i].address_semic%>"></td>
+                                        <td>
+                                            <%= sess %>
+                                        </td>
+                                        <td><input type="submit" value="수정" class="btn btn-success" /></td>
+                                        <td><input type="submit" value="삭제" class="btn btn-success"
+                                                onclick="javascript: form.action='/edituser/deleteaddress';" /></td>
+                                    </form>
+                                </tr>
+                            <% } %>
+                                <form class="addAddress" action="/edituser/addAddress" method="post">
+                                    <tr>
+                                        <td><input class="form-control" type="text" name="address_num"
+                                                placeholder="" value=""></td>
+                                        <td><input class="form-control" type="text" name="address_basic"
+                                                placeholder="" value=""></td>
+                                        <td><input class="form-control" type="text" name="address_semic"
+                                                placeholder="" value=""></td>
+                                        <td>
+                                            <%= sess %>
+                                        </td>
+                                        <td colspan="2"><button type="submit"
+                                                class="btn btn-success wd-full">추가</button></td>
+                                    </tr>
+                                </form>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        </div>
+</body>
+
+</html>
